@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers.PredictMeFuelConsRoutes import router as fuel_cons_router
+from .routers.route_fule_optimization_for_good_weather_ import router as fuel_cons_router
 
 app = FastAPI()
 

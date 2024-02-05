@@ -1,6 +1,11 @@
-fastapi
-uvicorn
-sqlalchemy
-alembic
-asyncpg
-pydantic
+h5py
+joblib
+numpy
+pandas
+seaborn
+statsmodels
+scipy
+matplotlib
+xgboost
+sklearn
+scikit-learn
