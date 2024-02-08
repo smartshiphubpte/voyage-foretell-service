@@ -4,19 +4,19 @@ import asyncpg  # Ensure asyncpg is imported
 
 # TODO: load from the dotenv
 
-DB_USER= "postgres"
-DB_PASSWORD= "postgres"
-DB_HOST= "localhost"
-DB_PORT= 5432
-DB_NAME= "postgres"
-DB_SCHEMA= "shipping_db"
+# DB_USER= "postgres"
+# DB_PASSWORD= "postgres"
+# DB_HOST= "localhost"
+# DB_PORT= 5432
+# DB_NAME= "postgres"
+# DB_SCHEMA= "shipping_db"
 
-# DB_USER = "postgres"
-# DB_PASSWORD = "bzeUm@)=J=*5XRbI"
-# DB_HOST = "34.93.52.26"
-# DB_PORT = 5432
-# DB_NAME = "uat"
-# DB_SCHEMA = "shipping_db"
+DB_USER = "postgres"
+DB_PASSWORD = "bzeUm@)=J=*5XRbI"
+DB_HOST = "34.93.52.26"
+DB_PORT = 5432
+DB_NAME = "orion"
+DB_SCHEMA = "shipping_db"
 
 # Construct the DATABASE_URL using the variables
 DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"

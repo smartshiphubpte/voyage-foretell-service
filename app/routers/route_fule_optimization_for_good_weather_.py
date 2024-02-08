@@ -23,26 +23,26 @@ target_transformer = joblib.load('app/models/orion/target_transformer.joblib')
 async def predict_fuel_consumptions_from_last_noon(vesselid: int, db=Depends(get_db)):
     query = """
         SELECT
-        noonreportdata ->> 'Slip' AS "slip",
-        noonreportdata ->> 'ME_RPM' AS "me_rpm",
-        noonreportdata ->> 'Distance' AS "distance",
-        noonreportdata ->> 'Avg_Speed' AS "avg_speed",
-        noonreportdata ->> 'Draft_AFT' AS "draft_aft",
-        noonreportdata ->> 'Draft_FWD' AS "draft_fwd",
-        noonreportdata ->> 'Sea_Height' AS "sea_height",
-        noonreportdata ->> 'Wind_Speed' AS "wind_speed",
-        noonreportdata ->> 'Swell_Height' AS "swell_height",
-        noonreportdata ->> 'Distance_Remaining_To_EOV' AS "distance_remaining_to_eov",
-        noonreportdata ->> 'ME_Running_Hrs' AS "me_running_hrs",
-        noonreportdata ->> 'Douglas_Sea_State' AS "douglas_sea_state",
-        noonreportdata ->> 'Average_Speed_Since_SOV' AS "average_speed_since_sov",
-        noonreportdata ->> 'Distance_Covered_Since_SOV' AS "distance_covered_since_sov",
-        noonreportdata ->> 'Total_HFO_Consumed_In_MT' AS "total_hfo_consumed_in_mt",
+        CAST(noonreportdata ->> 'Slip' AS FLOAT) AS "slip",
+        CAST(noonreportdata ->> 'ME_RPM' AS FLOAT) AS "me_rpm",
+        CAST(noonreportdata ->> 'Distance' AS FLOAT) AS "distance",
+        CAST(noonreportdata ->> 'Avg_Speed' AS FLOAT) AS "avg_speed",
+        CAST(noonreportdata ->> 'Draft_AFT' AS FLOAT) AS "draft_aft",
+        CAST(noonreportdata ->> 'Draft_FWD' AS FLOAT) AS "draft_fwd",
+        CAST(noonreportdata ->> 'Sea_Height' AS FLOAT) AS "sea_height",
+        CAST(noonreportdata ->> 'Wind_Speed' AS FLOAT) AS "wind_speed",
+        CAST(noonreportdata ->> 'Swell_Height' AS FLOAT) AS "swell_height",
+        CAST(noonreportdata ->> 'Distance_Remaining_To_EOV' AS FLOAT) AS "distance_remaining_to_eov",
+        CAST(noonreportdata ->> 'ME_Running_Hrs' AS FLOAT) AS "me_running_hrs",
+        CAST(noonreportdata ->> 'Douglas_Sea_State' AS FLOAT) AS "douglas_sea_state",
+        CAST(noonreportdata ->> 'Average_Speed_Since_SOV' AS FLOAT) AS "average_speed_since_sov",
+        CAST(noonreportdata ->> 'Distance_Covered_Since_SOV' AS FLOAT) AS "distance_covered_since_sov",
+        CAST(noonreportdata ->> 'Total_HFO_Consumed_In_MT' AS FLOAT) AS "total_hfo_consumed_in_mt",
         noonreportdata ->> 'ETA_Next_Port' AS "eta_next_port",
-        noonreportdata ->> 'Total_HFOME_Consumed_In_MT' AS "total_hfome_consumed_in_mt",
-        noonreportdata ->> 'Total_ULSGOME_Consumed_In_MT' AS "total_ulsgome_consumed_in_mt",
-        noonreportdata ->> 'Total_VLSFOME_Consumed_In_MT' AS "total_vlsfome_consumed_in_mt",
-        noonreportdata ->> 'Total_VLSGOME_Consumed_In_MT' AS "total_vlsgome_consumed_in_mt"
+        CAST(noonreportdata ->> 'Total_HFOME_Consumed_In_MT' AS FLOAT) AS "total_hfome_consumed_in_mt",
+        CAST(noonreportdata ->> 'Total_ULSGOME_Consumed_In_MT' AS FLOAT) AS "total_ulsgome_consumed_in_mt",
+        CAST(noonreportdata ->> 'Total_VLSFOME_Consumed_In_MT' AS FLOAT) AS "total_vlsfome_consumed_in_mt",
+        CAST(noonreportdata ->> 'Total_VLSGOME_Consumed_In_MT' AS FLOAT) AS "total_vlsgome_consumed_in_mt"
     FROM (
         SELECT *,
             row_number() OVER (ORDER BY id DESC) as rn
@@ -64,5 +64,5 @@ async def predict_fuel_consumptions_from_last_noon(vesselid: int, db=Depends(get
 
 @router.post("/predict_noon")
 async def predict_noon(item: Input):
-    return await predict_fuel_consumption(item)
+    return await predict_fuel_consumption(item.model_dump())
     

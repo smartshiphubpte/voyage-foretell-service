@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 import numpy as np
 
-def to_model_required_format(noon_report):
-    noon_dict = noon_report.model_dump() 
+def to_model_required_format(noon_dict):
+    # noon_dict = noon_report.model_dump() 
     # added lag values means given by prashant sir 
     noon_dict["Total Fuel Consumption(MT)_lag_3"] = 20.179280575539565
     noon_dict["me_rpm_lag_3"] = 70.39496402877698 
@@ -12,7 +12,7 @@ def to_model_required_format(noon_report):
     # added power values means given by prashant sir 
     noon_dict["me_power"] = 4637.99019391367
     noon_dict["shaft_power"] = 4037.99019391367
-    noon_dict["days_remaining"] = (datetime.strptime(noon_report.eta_next_port, "%d %b %Y %H%M") - datetime.now()).days
+    noon_dict["days_remaining"] = (datetime.strptime(noon_dict['eta_next_port'], "%d %b %Y %H%M") - datetime.now()).days
     noon_dict.pop("eta_next_port")
 
     # calculate total fuel consumption
@@ -51,6 +51,7 @@ def calculate_MEFC(noon_dict):
     return noon_dict
     
 def calculate_main_draft_and_trim(noon_dict):
-    noon_dict["Main Draft (mtr)"] = (float(noon_dict['draft_aft'])+float(noon_dict['draft_fwd'] / 2))
-    noon_dict["Trim(mtr)"] = noon_dict['draft_aft'] - noon_dict['draft_fwd'] 
+    # noon_dict["Main Draft (mtr)"] = (float(noon_dict['draft_aft']) + float(noon_dict['draft_fwd'] / 2))
+    noon_dict["Main Draft (mtr)"] = (float(noon_dict['draft_aft']) + float(noon_dict['draft_fwd'] )/2)
+    noon_dict["Trim(mtr)"] = float(noon_dict['draft_aft']) - float(noon_dict['draft_fwd']) 
     return noon_dict
