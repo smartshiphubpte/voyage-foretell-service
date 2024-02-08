@@ -1,22 +1,10 @@
-from fastapi import APIRouter, Depends ,HTTPException
+from fastapi import APIRouter, Depends 
 from app.database_ import get_db
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.sql import text
-import numpy as np
-import pandas as pd
-import joblib
-import xmltodict 
 from app.validator.validator_fule_optimization_for_good_weather_ import Input
-from scipy.optimize import differential_evolution
-from datetime import datetime, timedelta
-from app.utils.utils_route_fule_optimization_for_good_weather_ import to_model_required_format ,fuel_consumption_objective
-from app.controller.controller_fule_optimization_for_good_weather_ import predict_fuel_consumption
+from app.controller.controller_fuel_optimization_for_good_weather_ import predict_fuel_consumption
+
 router = APIRouter()
 
-# Load the trained model
-model = joblib.load('app/models/orion/fule_optimization_for_good_weather.joblib')
-feature_transformer = joblib.load('app/models/orion/feature_transformer.joblib')
-target_transformer = joblib.load('app/models/orion/target_transformer.joblib')
 
 
 @router.get("/predict_noon/{vesselid}")

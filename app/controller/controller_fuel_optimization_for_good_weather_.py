@@ -5,7 +5,7 @@ import joblib
 from app.validator.validator_fule_optimization_for_good_weather_ import Input
 from scipy.optimize import differential_evolution
 from datetime import datetime, timedelta
-from app.utils.utils_route_fule_optimization_for_good_weather_ import to_model_required_format ,fuel_consumption_objective
+from app.utils.utils_route_fuel_optimization_for_good_weather_ import to_model_required_format ,fuel_consumption_objective
 
 
 # Load the trained model
