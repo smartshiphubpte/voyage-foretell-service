@@ -7,5 +7,6 @@ statsmodels
 scipy
 matplotlib
 xgboost
-sklearn
 scikit-learn
+aiopg
+xmltodict
