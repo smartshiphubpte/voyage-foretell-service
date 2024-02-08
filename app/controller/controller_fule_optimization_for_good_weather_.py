@@ -52,5 +52,5 @@ async def predict_fuel_consumption(item:Input):
     return  pd.DataFrame({
         'Date':  future_dates,
         'Optimized Speed': [optimized_speed] * days_remaining,
-        'Fuel Consumption per Day': [fuel_consumption_per_day] * days_remaining
+        'Fuel Consumption per Day': [fuel_consumption_per_day / 1000] * days_remaining
     }).to_dict('records')
