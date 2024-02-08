@@ -3,9 +3,9 @@ from app.database_ import get_db
 from app.validator.validator_fule_optimization_for_good_weather_ import Input
 from app.controller.controller_fuel_optimization_for_good_weather_ import predict_fuel_consumption
 
-router = APIRouter()
+router = APIRouter(prefix='/voyage-foretell-service-be')
 
-@router.get("/predict_noon/{vesselid}")
+@router.get("/good_weather_fuel_optimization/{vesselid}")
 async def predict_fuel_consumptions_from_last_noon(vesselid: int, db=Depends(get_db)):
     query = """
         SELECT
@@ -48,7 +48,7 @@ async def predict_fuel_consumptions_from_last_noon(vesselid: int, db=Depends(get
     else:
         return {"error": "No data found for vessel ID {}".format(vesselid)}
 
-@router.post("/predict_noon")
-async def predict_noon(item: Input):
+@router.post("/good_weather_fuel_optimization")
+async def predict_fuel_consumptions_with_default_values(item: Input):
     return await predict_fuel_consumption(item.model_dump())
     

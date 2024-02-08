@@ -3,8 +3,7 @@ from .routers.route_fuel_optimization_for_good_weather_ import router as fuel_co
 
 app = FastAPI(
     docs_url="/voyage-foretell-service-be/docs",
-    openapi_url="/voyage-foretell-service-be/openapi.json",
-    prefix='/voyage-foretell-service-be'
+    openapi_url="/voyage-foretell-service-be/openapi.json"
 )
 
 # me fuel cons model route 
