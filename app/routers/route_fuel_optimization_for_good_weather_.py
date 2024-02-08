@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Depends 
+from fastapi import APIRouter, Depends ,FastAPI 
 from app.database_ import get_db
 from app.validator.validator_fule_optimization_for_good_weather_ import Input
 from app.controller.controller_fuel_optimization_for_good_weather_ import predict_fuel_consumption
 
-router = APIRouter()
+app = FastAPI()
+router = APIRouter(prefix="/voyage-foretell-service-be")
 
 
 
