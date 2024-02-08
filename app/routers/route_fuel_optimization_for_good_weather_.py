@@ -1,12 +1,9 @@
-from fastapi import APIRouter, Depends ,FastAPI 
+from fastapi import APIRouter, Depends 
 from app.database_ import get_db
 from app.validator.validator_fule_optimization_for_good_weather_ import Input
 from app.controller.controller_fuel_optimization_for_good_weather_ import predict_fuel_consumption
 
-app = FastAPI()
-router = APIRouter(prefix="/voyage-foretell-service-be")
-
-
+router = APIRouter()
 
 @router.get("/predict_noon/{vesselid}")
 async def predict_fuel_consumptions_from_last_noon(vesselid: int, db=Depends(get_db)):
